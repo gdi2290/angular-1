@@ -12,7 +12,7 @@
  * The http module provides services to perform http requests. To get started, see the {@link Http}
  * class.
  */
-import {provide} from '@angular/core';
+import {AppModule, provide} from '@angular/core';
 
 import {BrowserJsonp} from './src/backends/browser_jsonp';
 import {BrowserXhr} from './src/backends/browser_xhr';
@@ -36,6 +36,14 @@ export {Request} from './src/static_request';
 export {Response} from './src/static_response';
 export {QueryEncoder, URLSearchParams} from './src/url_search_params';
 
+
+/**
+ * The app module for forms.
+ * @experimental
+ */
+@AppModule({providers: [FORM_PROVIDERS], directives: FORM_DIRECTIVES, pipes: []})
+export class FormsModule {
+}
 
 
 /**
@@ -194,6 +202,13 @@ export const HTTP_PROVIDERS: any[] = [
   {provide: XSRFStrategy, useValue: new CookieXSRFStrategy()},
 ];
 
+/**
+ * The app module for http.
+ * @experimental
+ */
+@AppModule({providers: HTTP_PROVIDERS, directives: [], pipes: []})
+export class HttpModule {
+}
 
 /**
  * @experimental
@@ -327,6 +342,14 @@ export const JSONP_PROVIDERS: any[] = [
   {provide: ResponseOptions, useClass: BaseResponseOptions},
   {provide: JSONPBackend, useClass: JSONPBackend_},
 ];
+
+/**
+ * The app module for jsonp.
+ * @experimental
+ */
+@AppModule({providers: JSONP_PROVIDERS, directives: [], pipes: []})
+export class JsonpModule {
+}
 
 function jsonpFactory(jsonpBackend: JSONPBackend, requestOptions: RequestOptions) {
   return new Jsonp(jsonpBackend, requestOptions);
